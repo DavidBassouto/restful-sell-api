@@ -1,8 +1,9 @@
 import 'reflect-metadata';
-import express, { NextFunction, Request, response, Response } from 'express';
+import express, { NextFunction, Request, Response } from 'express';
 import cors from 'cors';
 import { routes } from './routes';
-import { AppError } from '@shared/errors/AppError';
+import { AppError } from '../errors/AppError';
+import '../typeorm';
 
 const app = express();
 
@@ -27,6 +28,6 @@ app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
   next();
 });
 
-app.listen(3333, () => {
+app.listen(process.env.PORT || 3333, () => {
   console.log('Server starded on port 3333!✨');
 });
