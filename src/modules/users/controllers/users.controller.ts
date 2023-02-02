@@ -6,7 +6,6 @@ export class UsersController {
   public async index(req: Request, res: Response) {
     const listUser = new ListUsersService();
 
-    console.log(req.user);
     const users = await listUser.execute();
 
     return res.json({
