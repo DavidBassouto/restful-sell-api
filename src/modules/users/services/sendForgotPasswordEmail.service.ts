@@ -18,8 +18,10 @@ export class sendForgotPasswordEmailService {
       throw new AppError('This user does not exists');
     }
 
-    await userTokenRepository.generateToken(user.id);
+    const tokenGenerated = await userTokenRepository.generateToken(
+      user.id,
+    );
 
-    return true;
+    return tokenGenerated.token;
   }
 }
