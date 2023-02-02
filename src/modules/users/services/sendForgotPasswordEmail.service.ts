@@ -15,11 +15,11 @@ export class sendForgotPasswordEmailService {
 
     const user = await userRepository.findByEmail(email);
     if (!user) {
-      throw new AppError('This user dows not exists');
+      throw new AppError('This user does not exists');
     }
 
-    const token = await userTokenRepository.generateToken(user.id);
+    await userTokenRepository.generateToken(user.id);
 
-    console.log(token);
+    return true;
   }
 }
