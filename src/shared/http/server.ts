@@ -6,6 +6,7 @@ import { routes } from './routes';
 import { AppError } from '../errors/AppError';
 import { errors } from 'celebrate';
 import '../typeorm';
+import 'dotenv/config';
 
 const app = express();
 
