@@ -24,8 +24,18 @@ export class sendForgotPasswordEmailService {
     );
 
     await EtherealMail.sendMail({
-      to: email,
-      body: `Solicitação de redefinição de senha recebida: ${tokenGenerated.token}`,
+      to: {
+        name: user.name,
+        email: user.email,
+      },
+      subject: '[API VENDAS] - Recuperação de senhas ',
+      templateData: {
+        template: `Olá {{name}}. Sua Solicitação de redefinição de senha foi recebida. Seu token de redefinição de senha é {{token}}`,
+        variables: {
+          name: user.name,
+          token: tokenGenerated.token,
+        },
+      },
     });
     return tokenGenerated.token;
   }
