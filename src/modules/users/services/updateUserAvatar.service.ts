@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import uploadConfig from '../../../config/upload';
 import { AppError } from '../../../shared/errors/AppError';
-import { AppDataSource } from '../../../shared/typeorm/data-source';
+import { AppDataSource } from '../../../shared/http/data-source';
 import { User } from '../typeorm/entities/user.entities';
 interface IRequest {
   avatarFileName: string;

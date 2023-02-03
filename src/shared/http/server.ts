@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 import 'dotenv/config';
-import { AppDataSource } from '../typeorm/data-source';
+import { AppDataSource } from './data-source';
 import { app } from './App';
 
 (async () => {

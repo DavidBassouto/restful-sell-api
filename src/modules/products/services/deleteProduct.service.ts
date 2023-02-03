@@ -1,5 +1,5 @@
 import { AppError } from '../../../shared/errors/AppError';
-import { AppDataSource } from '../../../shared/typeorm/data-source';
+import { AppDataSource } from '../../../shared/http/data-source';
 import { Product } from '../typeorm/entities/products.entitites';
 
 interface IRequest {

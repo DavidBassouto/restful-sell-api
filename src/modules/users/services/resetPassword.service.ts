@@ -1,7 +1,7 @@
 import { hash } from 'bcryptjs';
 import { addHours, isAfter } from 'date-fns';
 import { AppError } from '../../../shared/errors/AppError';
-import { AppDataSource } from '../../../shared/typeorm/data-source';
+import { AppDataSource } from '../../../shared/http/data-source';
 import { User } from '../typeorm/entities/user.entities';
 import { UserTokens } from '../typeorm/entities/userTokens.entities';
 

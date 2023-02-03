@@ -4,7 +4,7 @@ import 'express-async-errors';
 import { routes } from './routes';
 import { AppError } from '../errors/AppError';
 import { errors } from 'celebrate';
-import '../typeorm/data-source';
+import './data-source';
 
 export const app = express();
 

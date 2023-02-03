@@ -1,4 +1,4 @@
-import { AppDataSource } from '../../../shared/typeorm/data-source';
+import { AppDataSource } from '../../../shared/http/data-source';
 import { User } from '../typeorm/entities/user.entities';
 
 export class ListUsersService {
