@@ -7,7 +7,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity('user_tokens')
+@Entity('password_tokens')
 export class UserTokens {
   @PrimaryGeneratedColumn('uuid')
   readonly id: string;
