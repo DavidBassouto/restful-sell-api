@@ -48,10 +48,11 @@ export class EtherealMail {
       html: await mailTemplate.parse(templateData),
     });
 
-    console.log('Message sent: %s', message.messageId);
-    console.log(
-      'Preview URL: %s',
-      nodemailer.getTestMessageUrl(message),
-    );
+    // console.log('Message sent: %s', message.messageId);
+    // console.log(
+    //   'Preview URL: %s',
+    //   nodemailer.getTestMessageUrl(message),
+    // );
+    return nodemailer.getTestMessageUrl(message);
   }
 }
