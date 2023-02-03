@@ -11,13 +11,13 @@ export class ForgotPasswordController {
     const sendForgotPasswordEmail =
       new sendForgotPasswordEmailService();
 
-    const tokenToRedefinePassword =
+    const previewLinkToRedefinePassword =
       await sendForgotPasswordEmail.execute({ email });
 
     return res
       .json({
         message: 'Link to redefine password sended to email address',
-        token_generated: tokenToRedefinePassword,
+        preview_url: previewLinkToRedefinePassword,
       })
       .status(200);
   }

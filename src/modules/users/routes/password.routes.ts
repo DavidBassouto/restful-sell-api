@@ -1,6 +1,6 @@
 import { celebrate, Joi, Segments } from 'celebrate';
 import { Router } from 'express';
-import { ForgotPasswordController } from '../controllers/forgotPassword.contoller';
+import { ForgotPasswordController } from '../controllers/sendForgotPassword.contoller';
 import { ResetPasswordController } from '../controllers/resetPassword.ontroller';
 
 export const passwordRouter = Router();
