@@ -1,9 +1,9 @@
-import { getCustomRepository } from 'typeorm';
-import { ProductRepository } from '../typeorm/repositories/products.repositories';
+import { AppDataSource } from '../../../shared/typeorm/data-source';
+import { Product } from '../typeorm/entities/products.entitites';
 
 export class ListProductsService {
   public async execute() {
-    const productRepository = getCustomRepository(ProductRepository);
+    const productRepository = AppDataSource.getRepository(Product);
 
     const products = await productRepository.find();
 

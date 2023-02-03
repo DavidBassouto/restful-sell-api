@@ -1,26 +1,27 @@
 import {
   Column,
-  CreateDateColumn,
   Entity,
   Generated,
   PrimaryGeneratedColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 
 @Entity('user_tokens')
 export class UserTokens {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  readonly id: string;
 
-  @Column()
+  @Column({ type: 'varchar' })
   @Generated('uuid')
   token: string;
 
-  @Column()
+  @Column({ type: 'varchar' })
   user_id: string;
 
-  @CreateDateColumn()
+  @CreateDateColumn({ type: 'date' })
   created_at: Date;
 
-  @CreateDateColumn()
+  @UpdateDateColumn({ type: 'date' })
   updated_at: Date;
 }

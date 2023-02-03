@@ -1,15 +1,17 @@
 import {
   Column,
-  CreateDateColumn,
   Entity,
   PrimaryGeneratedColumn,
+  CreateDateColumn,
   UpdateDateColumn,
+  ManyToOne,
 } from 'typeorm';
+import { User } from '../../../users/typeorm/entities/user.entities';
 
 @Entity('products')
 export class Product {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  readonly id: string;
 
   @Column({ type: 'varchar' })
   name: string;
@@ -20,9 +22,15 @@ export class Product {
   @Column({ type: 'int' })
   quantity: number;
 
-  @CreateDateColumn({ type: 'datetime' })
+  @CreateDateColumn({ type: 'date' })
   created_at: Date;
 
-  @UpdateDateColumn({ type: 'datetime' })
+  @UpdateDateColumn({ type: 'date' })
   updated_at: Date;
+
+  @ManyToOne(() => User, user => user.products, {
+    cascade: true,
+    eager: true,
+  })
+  user: User;
 }

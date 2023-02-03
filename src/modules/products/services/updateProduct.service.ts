@@ -1,6 +1,6 @@
-import { getCustomRepository } from 'typeorm';
 import { AppError } from '../../../shared/errors/AppError';
-import { ProductRepository } from '../typeorm/repositories/products.repositories';
+import { AppDataSource } from '../../../shared/typeorm/data-source';
+import { Product } from '../typeorm/entities/products.entitites';
 
 interface IRequest {
   id: string;
@@ -10,13 +10,14 @@ interface IRequest {
 }
 export class UpdateProductService {
   public async execute({ id, name, price, quantity }: IRequest) {
-    const productRepository = getCustomRepository(ProductRepository);
-    const findProduct = await productRepository.findOne(id);
+    const productRepository = AppDataSource.getRepository(Product);
+
+    const findProduct = await productRepository.findOneBy({ id });
     if (!findProduct) {
       throw new AppError('Product not found');
     }
 
-    const productExists = await productRepository.findByName(name);
+    const productExists = await productRepository.findOneBy({ name });
 
     if (productExists) {
       throw new AppError(
@@ -35,6 +36,7 @@ export class UpdateProductService {
       : findProduct.quantity;
 
     await productRepository.save(findProduct);
+
     return findProduct;
   }
 }
