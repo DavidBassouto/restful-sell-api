@@ -2,6 +2,7 @@ import { Router } from 'express';
 import ProductsController from '../controllers/ProductController';
 
 import { celebrate, Joi, Segments } from 'celebrate';
+import { isAuthenticatedMiddleware } from '../../../shared/middlewares/isAuthenticated.middleware';
 
 const productsRouter = Router();
 const productsController = new ProductsController();
@@ -27,6 +28,7 @@ productsRouter.post(
       quantity: Joi.number().required(),
     },
   }),
+  isAuthenticatedMiddleware,
   productsController.createProduct,
 );
 productsRouter.patch(
@@ -41,6 +43,7 @@ productsRouter.patch(
       quantity: Joi.number(),
     },
   }),
+  isAuthenticatedMiddleware,
   productsController.updateProduct,
 );
 productsRouter.delete(

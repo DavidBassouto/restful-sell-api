@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { instanceToPlain } from 'class-transformer';
 
 import { UpdateUserAvatarService } from '../services/updateUserAvatar.service';
 
@@ -12,7 +13,7 @@ export class UserAvatarController {
 
     return res.status(201).json({
       message: 'Avatar updated with success',
-      user: userAvatar,
+      user: instanceToPlain(userAvatar),
     });
   }
 }

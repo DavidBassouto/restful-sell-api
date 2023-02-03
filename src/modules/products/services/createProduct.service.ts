@@ -1,5 +1,6 @@
 import { AppError } from '../../../shared/errors/AppError';
 import { AppDataSource } from '../../../shared/typeorm/data-source';
+import { User } from '../../users/typeorm/entities/user.entities';
 import { Product } from '../typeorm/entities/products.entitites';
 
 interface IRequest {
@@ -8,8 +9,17 @@ interface IRequest {
   quantity: number;
 }
 export class CreateProductService {
-  public async execute({ name, price, quantity }: IRequest) {
+  public async execute(
+    user_id: string,
+    { name, price, quantity }: IRequest,
+  ) {
     const productRepository = AppDataSource.getRepository(Product);
+    const userRepository = AppDataSource.getRepository(User);
+
+    const findUser = await userRepository.findOneBy({ id: user_id });
+    if (!findUser) {
+      throw new AppError('User Not Found');
+    }
 
     const productExists = await productRepository.findOneBy({ name });
 
@@ -22,6 +32,7 @@ export class CreateProductService {
       name,
       price,
       quantity,
+      user: findUser,
     });
 
     await productRepository.save(product);

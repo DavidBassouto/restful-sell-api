@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { CreateUsersService } from '../services/createUser.service';
 import { ListUsersService } from '../services/listUsers.service';
+import { instanceToPlain } from 'class-transformer';
 
 export class UsersController {
   public async index(req: Request, res: Response) {
@@ -10,7 +11,7 @@ export class UsersController {
 
     return res.json({
       message: 'Users listed with success',
-      users: users,
+      user: instanceToPlain(users),
     });
   }
 
@@ -22,7 +23,7 @@ export class UsersController {
 
     return res.status(201).json({
       message: 'User created with success',
-      user: user,
+      user: instanceToPlain(user),
     });
   }
 }
