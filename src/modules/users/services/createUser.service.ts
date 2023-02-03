@@ -12,7 +12,7 @@ export class CreateUsersService {
   public async execute({ name, email, password }: IRequest) {
     const userRepository = getCustomRepository(UserRepository);
 
-    const emailExists = await userRepository.findByName(email);
+    const emailExists = await userRepository.findByEmail(email);
 
     if (emailExists) {
       throw new AppError('This email have been in use');
