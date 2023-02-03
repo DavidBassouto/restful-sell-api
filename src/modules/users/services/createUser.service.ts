@@ -1,7 +1,7 @@
 import { hash } from 'bcryptjs';
-import { getCustomRepository } from 'typeorm';
 import { AppError } from '../../../shared/errors/AppError';
-import { UserRepository } from '../typeorm/repositories/user.repository';
+import { AppDataSource } from '../../../shared/typeorm/data-source';
+import { User } from '../typeorm/entities/user.entities';
 
 interface IRequest {
   name: string;
@@ -10,9 +10,9 @@ interface IRequest {
 }
 export class CreateUsersService {
   public async execute({ name, email, password }: IRequest) {
-    const userRepository = getCustomRepository(UserRepository);
+    const userRepository = AppDataSource.getRepository(User);
 
-    const emailExists = await userRepository.findByEmail(email);
+    const emailExists = await userRepository.findOneBy({ email });
 
     if (emailExists) {
       throw new AppError('This email have been in use');

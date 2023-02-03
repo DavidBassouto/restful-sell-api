@@ -1,10 +1,10 @@
 import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
-import { getCustomRepository } from 'typeorm';
-import { AppError } from '../../../shared/errors/AppError';
-import { UserRepository } from '../typeorm/repositories/user.repository';
 import '../../../config/authConfig';
 import authConfig from '../../../config/authConfig';
+import { AppError } from '../../../shared/errors/AppError';
+import { AppDataSource } from '../../../shared/typeorm/data-source';
+import { User } from '../typeorm/entities/user.entities';
 
 interface IRequest {
   email: string;
@@ -12,9 +12,9 @@ interface IRequest {
 }
 export class CreateSessionService {
   public async execute({ email, password }: IRequest) {
-    const userRepository = getCustomRepository(UserRepository);
+    const userRepository = AppDataSource.getRepository(User);
 
-    const user = await userRepository.findByEmail(email);
+    const user = await userRepository.findOneBy({ email });
 
     if (!user) {
       throw new AppError('Incorrect credencials', 401);
