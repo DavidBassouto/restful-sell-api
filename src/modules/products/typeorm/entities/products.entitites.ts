@@ -11,18 +11,18 @@ export class Product {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
+  @Column({ type: 'varchar' })
   name: string;
 
-  @Column('decimal')
+  @Column({ type: 'decimal' })
   price: number;
 
-  @Column('int')
+  @Column({ type: 'int' })
   quantity: number;
 
-  @CreateDateColumn()
+  @CreateDateColumn({ type: 'datetime' })
   created_at: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({ type: 'datetime' })
   updated_at: Date;
 }
